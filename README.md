@@ -1,5 +1,5 @@
 # CookBookApp
-Preview https://mykhalenych.github.io/CookBookApp/
+Preview https://wizardly-heisenberg-989dae.netlify.app
 
 ##Getting Started:
 First of all, clone this repo:
