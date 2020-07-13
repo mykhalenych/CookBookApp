@@ -1,14 +1,14 @@
-CookBookApp
-Preview 
+# CookBookApp
+Preview https://mykhalenych.github.io/CookBookApp/
 
-Getting Started:
+##Getting Started:
 First of all, clone this repo:
 
-$ git clone https://github.com/mykhalenych/CookBookApp.git
+```bash git clone https://github.com/mykhalenych/CookBookApp.git```
 Move to the project dir:
 
-npm i
-npm start
+```bash npm i```
+```bash npm start ```
 
 
 Technologies:
