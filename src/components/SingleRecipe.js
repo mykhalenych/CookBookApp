@@ -84,6 +84,7 @@ const SingleRecipe = ({
               onEdit={updateRecipe}
               editHistory={updateHistoryRecipe}
               id={id}
+              currentRecipe={currentRecipe}
             />
           )}
           <h3>Recipe</h3>

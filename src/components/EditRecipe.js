@@ -4,7 +4,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   editor: {
-    marginTop: theme.spacing(8),
+   marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -24,16 +24,9 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     position: "absolute",
     right: 0,
-  },
-  wrap: {
-    margin: theme.spacing(1),
-  },
-
-  input: {
-    display: "none",
-  },
+  }
 }));
-const EditRecipe = ({ closeModal, onEdit, id, editHistory }) => {
+const EditRecipe = ({ closeModal, onEdit, id, editHistory, currentRecipe }) => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -72,6 +65,7 @@ const EditRecipe = ({ closeModal, onEdit, id, editHistory }) => {
           label="Title"
           name="title"
           autoFocus
+          defaultValue={currentRecipe.title}
           onChange={(event) => handleChange(event)}
         />
         <TextField
@@ -83,6 +77,7 @@ const EditRecipe = ({ closeModal, onEdit, id, editHistory }) => {
           label="Description"
           type="description"
           id="description"
+          defaultValue={currentRecipe.description}
           onChange={(event) => setValue(event)}
         />
         <TextField
@@ -94,6 +89,7 @@ const EditRecipe = ({ closeModal, onEdit, id, editHistory }) => {
           label="image url"
           type="images"
           id="images"
+          defaultValue={currentRecipe.image}
           onChange={(event) => handleImage(event)}
         />
         <Button

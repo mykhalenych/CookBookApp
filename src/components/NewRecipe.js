@@ -20,9 +20,12 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     zIndex: 1000,
     backgroundColor: "#fafafa",
-    marginLeft: 100,
   },
   form: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     width: "100%",
     marginTop: theme.spacing(1),
     padding: 15,
@@ -40,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
   input: {
     display: "none",
+  },
+  wrapper: {
+    display: "flex",
+    justifyContent: "center",
   },
 }));
 
@@ -64,9 +71,9 @@ const NewRecipe = ({ closeModal, onCreate }) => {
   const classes = useStyles();
 
   return (
-    <Container component="div">
+    <Container component="div" className={classes.wrapper}>
       <CssBaseline />
-    
+
       <div className={classes.paper}>
         <CloseIcon className={classes.icon} onClick={closeModal} />
 
