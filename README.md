@@ -4,11 +4,11 @@ Preview https://mykhalenych.github.io/CookBookApp/
 ##Getting Started:
 First of all, clone this repo:
 
-```bash git clone https://github.com/mykhalenych/CookBookApp.git```
+``` git clone https://github.com/mykhalenych/CookBookApp.git```
 Move to the project dir:
 
-```bash npm i```
-```bash npm start ```
+``` npm i```
+``` npm start ```
 
 
 Technologies:

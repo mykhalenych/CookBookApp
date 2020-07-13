@@ -1,6 +1,7 @@
 import * as recipesGateway from "../gateway/gateway";
 
 export const RECIPE_LIST_RECIEVED = "RECIPE_LIST_RECIEVED";
+export const SINGLE_RECIPE_RECIVED = "SINGLE_RECIPE_RECIVED";
 
 export const recipeListRecieved = (recipeList) => {
   return {
@@ -10,12 +11,27 @@ export const recipeListRecieved = (recipeList) => {
     },
   };
 };
+export const singleRecipeRecived = (curentRecipe) => {
+  return {
+    type: SINGLE_RECIPE_RECIVED,
+    payload: {
+      curentRecipe,
+    },
+  };
+};
 
 export const getRecipeList = () => {
   return function (dispatch) {
     recipesGateway
       .fetchRecipeList()
       .then((recipeList) => dispatch(recipeListRecieved(recipeList)));
+  };
+};
+export const getReicepeListById = (id) => {
+  return function (dispatch) {
+    recipesGateway
+      .fetchRecipeListById(id)
+      .then((curentRecipe) => dispatch(singleRecipeRecived(curentRecipe)));
   };
 };
 
@@ -43,6 +59,21 @@ export const createRecipe = (title, description, image) => {
     };
     recipesGateway
       .createRecipe(newrecipe)
+      .then(() => dispatch(getRecipeList()));
+  };
+};
+
+export const editHistory = (recipeId) => {
+  return function (dispatch, getState) {
+    const history = getState();
+    const historyVersion = history.recipe.currentRecipe;
+    const updatedRecipe = {
+      historyVersion,
+      createAt: new Date().toISOString(),
+    };
+
+    recipesGateway
+      .updateRecipe(recipeId, updatedRecipe)
       .then(() => dispatch(getRecipeList()));
   };
 };

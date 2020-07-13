@@ -50,3 +50,14 @@ export const deleteRecipe = (id) => {
   }
 };
 
+export const fetchRecipeListById = (id) => {
+  return fetch(`${baseUrl}/${id}`)
+    .then((res) => {
+      try {
+        return res.json();
+      } catch {
+        throw new Error("Faild to get recipes");
+      }
+    })
+    .then((curentRecipe) => curentRecipe);
+};

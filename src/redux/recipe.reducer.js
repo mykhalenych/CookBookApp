@@ -1,4 +1,4 @@
-import { RECIPE_LIST_RECIEVED } from "./recipe.actions";
+import { RECIPE_LIST_RECIEVED, SINGLE_RECIPE_RECIVED } from "./recipe.actions";
 
 const initialState = {
   recipeList: [],
@@ -12,6 +12,13 @@ export const recipeReducer = (state = initialState, action) => {
         recipeList: action.payload.recipeList,
       };
     }
+    case SINGLE_RECIPE_RECIVED: {
+      return {
+        ...state,
+        currentRecipe: action.payload.curentRecipe,
+      };
+    }
+
     default:
       return state;
   }

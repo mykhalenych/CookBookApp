@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Container,
+  makeStyles,
+} from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -18,11 +20,12 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     zIndex: 1000,
     backgroundColor: "#fafafa",
+    marginLeft: 100,
   },
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
-    padding: "15px",
+    padding: 15,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -63,7 +66,7 @@ const NewRecipe = ({ closeModal, onCreate }) => {
   return (
     <Container component="div">
       <CssBaseline />
-
+    
       <div className={classes.paper}>
         <CloseIcon className={classes.icon} onClick={closeModal} />
 
@@ -123,7 +126,7 @@ const mapDispatch = {
 
 NewRecipe.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  createRecipe: PropTypes.func.isRequired,
+  createRecipe: PropTypes.func,
 };
 
 export default connect(null, mapDispatch)(NewRecipe);

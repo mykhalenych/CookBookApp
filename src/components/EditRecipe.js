@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, TextField, makeStyles } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
   },
 }));
-const EditRecipe = ({ closeModal, onEdit, id }) => {
+const EditRecipe = ({ closeModal, onEdit, id, editHistory }) => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -55,6 +53,7 @@ const EditRecipe = ({ closeModal, onEdit, id }) => {
       description,
     };
     onEdit(id, edit);
+    editHistory(id, edit);
     closeModal();
   };
 

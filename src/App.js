@@ -1,50 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/Header";
-import Main from "./components/Main";
-import Recipe from "./components/Recipe";
-import { recipeListSelector } from "./redux/recipe.selectors";
 import * as actions from "./redux/recipe.actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Route, Switch } from "react-router-dom";
+import routes from "./routes";
 
-const App = ({
-  recipe,
-  createRecipe,
-  updateRecipe,
-  deleteRecipe,
-  getRecipeList,
-}) => {
-  useEffect(() => {
-    getRecipeList();
-  }, []);
-
+const App = ({ createRecipe }) => {
   return (
     <div className="App">
       <Header onCreate={createRecipe} />
       <main>
-        <Main />
-        <Recipe recipe={recipe} onEdit={updateRecipe} onDelete={deleteRecipe} />
+        <Switch>
+          {routes.map((route) => (
+            <Route exact={route.exact} key={route.toString()} path={route.path}>
+              {route.component}
+            </Route>
+          ))}
+        </Switch>
       </main>
     </div>
   );
 };
 
 App.propTypes = {
-  getRecipeList: PropTypes.func.isRequired,
-  recipe: PropTypes.array,
   createRecipe: PropTypes.func,
-  deleteRecipe: PropTypes.func,
-  updateRecipe: PropTypes.func,
 };
 const mapDispatch = {
-  getRecipeList: actions.getRecipeList,
-  updateRecipe: actions.updateRecipe,
-  deleteRecipe: actions.deleteRecipe,
   createRecipe: actions.createRecipe,
 };
-const mapState = (state) => {
-  return {
-    recipe: recipeListSelector(state),
-  };
-};
-export default connect(mapState, mapDispatch)(App);
+
+export default connect(null, mapDispatch)(App);

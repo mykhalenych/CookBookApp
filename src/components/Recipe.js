@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import React, { useEffect } from "react";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  Container,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import EditRecipe from "./EditRecipe";
+import { recipeListSelector } from "../redux/recipe.selectors";
+import * as actions from "../redux/recipe.actions";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -28,17 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Recipe = ({ recipe, onEdit, onDelete }) => {
-  const [openModal, setModal] = useState(false);
-  const [recipeId, setId] = useState();
+const Recipe = ({ recipe, getRecipeList }) => {
+  useEffect(() => {
+    getRecipeList();
+  }, []);
 
-  const closeModal = () => {
-    setModal(false);
-  };
-  const handleClick = (dataId) => {
-    setModal(true);
-    setId(dataId);
-  };
   const classes = useStyles();
   if (!recipe) {
     return (
@@ -50,9 +50,6 @@ const Recipe = ({ recipe, onEdit, onDelete }) => {
   return (
     <>
       <Container className={classes.cardGrid}>
-        {openModal && (
-          <EditRecipe closeModal={closeModal} onEdit={onEdit} id={recipeId} />
-        )}
         <Grid container spacing={4}>
           {recipe.map((card) => (
             <Grid item key={card.id} xs={12} sm={6} md={4}>
@@ -69,20 +66,11 @@ const Recipe = ({ recipe, onEdit, onDelete }) => {
                   <Typography>{card.description}</Typography>
                 </CardContent>
                 <CardActions>
-                  <Button
-                    size="small"
-                    color="primary"
-                    onClick={() => onDelete(card.id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    size="small"
-                    color="primary"
-                    onClick={() => handleClick(card.id)}
-                  >
-                    Edit
-                  </Button>
+                  <Link to={`/${card.id}`}>
+                    <Button size="small" color="primary">
+                      View
+                    </Button>
+                  </Link>
                 </CardActions>
               </Card>
             </Grid>
@@ -92,4 +80,19 @@ const Recipe = ({ recipe, onEdit, onDelete }) => {
     </>
   );
 };
-export default Recipe;
+
+Recipe.propTypes = {
+  recipe: PropTypes.array,
+  deleteRecipe: PropTypes.func,
+  updateRecipe: PropTypes.func,
+};
+
+const mapDispatch = {
+  getRecipeList: actions.getRecipeList,
+};
+const mapState = (state) => {
+  return {
+    recipe: recipeListSelector(state),
+  };
+};
+export default connect(mapState, mapDispatch)(Recipe);
