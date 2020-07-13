@@ -14,10 +14,17 @@ Move to the project dir:
 Technologies:
 For this project I have used the following technologies:
 
-HTML5
-CSS3
-Materail Ui
-JS ES6
-React
-Redux
-Redux-thunk
+<ul>The tech stack is:</ul>
+
+<li>HTML5</li>
+<li>CSS3</li>
+<li>Materail Ui</li>
+<li>JS ES6</li>
+<li>React</li>
+<li>Redux</li>
+<li>Redux-thunk</li>
+
+
+
+
+
